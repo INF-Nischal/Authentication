@@ -59,11 +59,14 @@ const login = async (req, res) => {
       return res.status(401).json({ error: "Invalid Credentials" });
     }
 
-    res.json({ message: "Login Successful" });
+    const token = createToken(user._id);
+    res.cookie('JWT', token, { httpOnly: true, maxAge: maxAge * 1000 })
+
+    res.status(200).json({ message: "Login Successful" });
   } catch (error) {
     console.log(error);
 
-    res.json(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

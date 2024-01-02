@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/", router);
+app.use("/api", router);
 
 async function startServer() {
   await connectDB().catch(console.dir);
